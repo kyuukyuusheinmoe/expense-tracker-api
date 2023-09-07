@@ -1,0 +1,54 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id          Int           @id @default(autoincrement())
+  name        String
+  updatedAt   DateTime
+  createdAt   DateTime      @default(now())
+  balance     Float
+  Transaction Transaction[]
+}
+
+model Transaction {
+  id         Int      @id @default(autoincrement())
+  balance    Float
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  updatedAt  DateTime
+  createdAt  DateTime @default(now())
+  accountId  Int
+  account    Account  @relation(fields: [accountId], references: [id])
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  firstName String
+  lastName  String
+  phone     String
+  password  String
+  role      Role     @default(BASIC)
+  updatedAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model Category {
+  id          Int           @id @default(autoincrement())
+  name        String
+  updatedAt   DateTime
+  createdAt   DateTime      @default(now())
+  Transaction Transaction[]
+}
+
+enum Role {
+  ADMIN
+  BASIC
+}

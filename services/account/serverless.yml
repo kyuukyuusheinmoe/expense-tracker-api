@@ -1,0 +1,6 @@
+create:
+    handler: services/account/createAccount.handler
+    events:
+      - http: 
+          path: account/create
+          method: POST

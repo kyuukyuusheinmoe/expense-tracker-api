@@ -1,0 +1,13 @@
+list:
+  handler: services/transaction/listTransaction.handler
+  events:
+    - http: 
+        path: transaction/list
+        method: GET
+
+create:
+    handler: services/transacion/createTransaction.handler
+    events:
+      - http: 
+          path: transaction/create
+          method: POST
