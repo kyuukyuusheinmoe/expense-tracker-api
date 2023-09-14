@@ -13,11 +13,10 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs16.x
 
 functions:
-    - ${file(services/transaction/serverless.yml)}
-    - ${file(services/account/serverless.yml)}
+    - ${file(services/user/serverless.yml)}
 
 package:
   patterns:

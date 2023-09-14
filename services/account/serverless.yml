@@ -1,3 +1,10 @@
+list: 
+  handler: services/account/listAccount.handler
+  events:
+    - http:
+        path: account/list
+        method: GET
+
 create:
     handler: services/account/createAccount.handler
     events:

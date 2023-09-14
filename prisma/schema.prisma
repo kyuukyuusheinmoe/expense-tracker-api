@@ -30,11 +30,7 @@ model Transaction {
 
 model User {
   id        Int      @id @default(autoincrement())
-  email     String   @unique
-  firstName String
-  lastName  String
-  phone     String
-  password  String
+  name      String
   role      Role     @default(BASIC)
   updatedAt DateTime
   createdAt DateTime @default(now())

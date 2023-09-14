@@ -1,0 +1,6 @@
+create:
+  handler: services/user/createUser.handler
+  events:
+    - http: 
+        path: user/create
+        method: POST

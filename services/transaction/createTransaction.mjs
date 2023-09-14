@@ -1,7 +1,6 @@
-const { PrismaClient } = require("@prisma/client")
-const middy = require('middy')
-const httpJsonBodyParser = require("@middy/http-json-body-parser")
-const { responseConstructor } = require("../../utils/common")
+import { PrismaClient } from "@prisma/client"
+import middy from "middy"
+import { responseConstructor } from "../../utils/common.mjs"
 
 const prisma = new PrismaClient
 
@@ -18,4 +17,4 @@ const createTransaction = async (event) => {
 
 const handler = middy(createTransaction).use(httpJsonBodyParser)
 
-module.exports = {handler}
+export {handler}

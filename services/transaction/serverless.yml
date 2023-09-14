@@ -6,7 +6,7 @@ list:
         method: GET
 
 create:
-    handler: services/transacion/createTransaction.handler
+    handler: services/transaction/createTransaction.handler
     events:
       - http: 
           path: transaction/create
