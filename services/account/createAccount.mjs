@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client"
 import middy from "middy"
-import {jsonBodyParser} from 'middy/middlewares'
+import httpJsonBodyParser from "@middy/http-json-body-parser";
 import { responseConstructor } from "../../utils/common.mjs"
 
 const prisma = new PrismaClient
@@ -13,6 +13,6 @@ const createAccount = async (event) => {
     return response
 }
 
-const handler = middy(createAccount).use(jsonBodyParser)
+const handler = middy(createAccount).use(httpJsonBodyParser())
 
 module.exports = {handler}

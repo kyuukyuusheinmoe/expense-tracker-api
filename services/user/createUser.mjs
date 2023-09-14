@@ -3,7 +3,6 @@ import { responseConstructor } from "../../utils/common.mjs";
 import middy from "middy";
 import httpJsonBodyParser from "@middy/http-json-body-parser";
 
-
 const prisma = new PrismaClient()
 
 const createUser = async (event) => {

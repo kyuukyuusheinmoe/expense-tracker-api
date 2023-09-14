@@ -1,6 +1,6 @@
 org: kyukyu
-app: my-serverless
-service: my-serverless
+app: exp-tracker
+service: exp-tracker
 frameworkVersion: '3'
 
 plugins:
@@ -9,6 +9,7 @@ plugins:
 
 custom:
   serverless-offline:
+    noPrependStageInUrl: true
     httpPort: 4000
 
 provider:
@@ -16,7 +17,10 @@ provider:
   runtime: nodejs16.x
 
 functions:
+    - ${file(services/account/serverless.yml)}
+    - ${file(services/transaction/serverless.yml)}
     - ${file(services/user/serverless.yml)}
+
 
 package:
   patterns:
