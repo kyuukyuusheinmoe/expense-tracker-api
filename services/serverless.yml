@@ -1,0 +1,48 @@
+accountList: 
+  handler: services/account/listAccount.handler
+  events:
+    - http:
+        path: account/list
+        method: GET
+
+accountCreate:
+    handler: services/account/createAccount.handler
+    events:
+      - http: 
+          path: account/create
+          method: POST
+
+transactionList:
+  handler: services/transaction/listTransaction.handler
+  events:
+    - http: 
+        path: transaction/list
+        method: GET
+
+transactonCreate:
+    handler: services/transaction/createTransaction.handler
+    events:
+      - http: 
+          path: transaction/create
+          method: POST
+
+userCreate:
+  handler: services/user/createUser.handler
+  events:
+    - http: 
+        path: user/create
+        method: POST
+
+categoryList:
+  handler: services/category/listCategory.handler
+  events:
+    - http: 
+        path: category/list
+        method: GET
+
+categoryCreate:
+  handler: services/category/createCategory.handler
+  events:
+    - http: 
+        path: category/create
+        method: POST

@@ -17,9 +17,7 @@ provider:
   runtime: nodejs16.x
 
 functions:
-    - ${file(services/account/serverless.yml)}
-    - ${file(services/transaction/serverless.yml)}
-    - ${file(services/user/serverless.yml)}
+    - ${file(services/serverless.yml)}
 
 
 package:
