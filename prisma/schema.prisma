@@ -38,7 +38,8 @@ model User {
 
 model Category {
   id          Int           @id @default(autoincrement())
-  name        String
+  label       String
+  value       String
   updatedAt   DateTime
   createdAt   DateTime      @default(now())
   Transaction Transaction[]
