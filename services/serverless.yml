@@ -5,7 +5,7 @@ accountList:
         path: account/list
         method: GET
 
-accountCreate:
+createAccount:
     handler: services/account/createAccount.handler
     events:
       - http: 

@@ -10,10 +10,11 @@ datasource db {
 
 model Account {
   id          Int           @id @default(autoincrement())
-  name        String
-  updatedAt   DateTime
-  createdAt   DateTime      @default(now())
+  type        String
+  name        String?
   balance     Float
+  updatedAt   DateTime      @default(now())
+  createdAt   DateTime      @default(now())
   Transaction Transaction[]
 }
 
@@ -48,4 +49,10 @@ model Category {
 enum Role {
   ADMIN
   BASIC
+}
+
+enum AccountType {
+  BANK
+  PAY
+  CASH
 }
