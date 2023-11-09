@@ -13,13 +13,13 @@ createAccount:
           method: POST
 
 transactionList:
-  handler: services/transaction/listTransaction.handler
-  events:
-    - http: 
-        path: transaction/list
-        method: GET
+    handler: services/transaction/listTransaction.handler
+    events:
+      - http: 
+          path: transaction/list
+          method: GET
 
-transactonCreate:
+createTransaction:
     handler: services/transaction/createTransaction.handler
     events:
       - http: 
