@@ -29,7 +29,9 @@ async function addTransactionAndUpdateBalance(transactionData) {
       const updatedAccount = await prisma.account.update({
         where: { id: accountId },
         data: {
-          balance: spentType === "in" ? account.balance + amount : account.balance - amount ,
+          balance: spentType === "in" ? account.balance + amount : account.balance - amount,
+          debitBalance: account.debitBalance + (spentType === "out" ? amount : 0),
+          creditBalance: account.creditBalance + (spentType === "in" ? amount : 0),
         },
       });
   

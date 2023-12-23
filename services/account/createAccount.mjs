@@ -7,7 +7,6 @@ const prisma = new PrismaClient
 
 const createAccount = async (event) => {
     const body = event.body
-    console.log ('xxx event ', event)
     const result = await prisma.account.create({data: {...body, updatedAt: new Date()}})
     const response = responseConstructor(200, result)
 

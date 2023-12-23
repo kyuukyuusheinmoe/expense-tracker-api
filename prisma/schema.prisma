@@ -9,13 +9,15 @@ datasource db {
 }
 
 model Account {
-  id          Int           @id @default(autoincrement())
-  accountType String
-  name        String?
-  balance     Float
-  updatedAt   DateTime      @default(now())
-  createdAt   DateTime      @default(now())
-  Transaction Transaction[]
+  id            Int           @id @default(autoincrement())
+  accountType   String
+  name          String?
+  balance       Float
+  debitBalance  Int           @default(0)
+  creditBalance Int           @default(0)
+  updatedAt     DateTime      @default(now())
+  createdAt     DateTime      @default(now())
+  Transaction   Transaction[]
 }
 
 model Transaction {
