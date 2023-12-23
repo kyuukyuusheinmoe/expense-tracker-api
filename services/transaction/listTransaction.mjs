@@ -5,7 +5,10 @@ import { responseConstructor } from "../../utils/common.mjs"
 const prisma = new PrismaClient()
 
 const listTransaction = async () => {
-    const list = await prisma.transaction.findMany()
+    const list = await prisma.transaction.findMany({include: {
+        account: {select: {name:true, accountType :true }},
+        category: {select: {label:true }},
+      },})
 
     const response = responseConstructor(200, list);
     return response
