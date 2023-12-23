@@ -28,7 +28,7 @@ model Transaction {
   spentAt    DateTime
   updatedAt  DateTime
   createdAt  DateTime @default(now())
-  necessity  String
+  necessity  String?
   accountId  Int
   account    Account  @relation(fields: [accountId], references: [id])
 }
