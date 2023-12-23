@@ -6,9 +6,7 @@ import { responseConstructor } from "../../utils/common.mjs"
 const prisma = new PrismaClient
 
 const createTransaction = async (event) => {
-    const body = event.body
-
-    const result = await prisma.transaction.create({...body})
+    const result = await prisma.transaction.create({data: {...event.body, updatedAt: new Date()}})
 
     const response = responseConstructor(200, result)
 

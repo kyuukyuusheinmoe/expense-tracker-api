@@ -10,7 +10,7 @@ datasource db {
 
 model Account {
   id          Int           @id @default(autoincrement())
-  type        String
+  accountType String
   name        String?
   balance     Float
   updatedAt   DateTime      @default(now())
@@ -20,11 +20,15 @@ model Account {
 
 model Transaction {
   id         Int      @id @default(autoincrement())
-  balance    Float
+  title      String
+  amount     Float
   categoryId Int
   category   Category @relation(fields: [categoryId], references: [id])
+  spentType  String
+  spentAt    DateTime
   updatedAt  DateTime
   createdAt  DateTime @default(now())
+  necessity  String
   accountId  Int
   account    Account  @relation(fields: [accountId], references: [id])
 }
