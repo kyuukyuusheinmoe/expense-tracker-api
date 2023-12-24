@@ -12,7 +12,7 @@ model Account {
   id            Int           @id @default(autoincrement())
   accountType   String
   name          String?
-  balance       Float
+  balance       Float?        @default(0)
   debitBalance  Int           @default(0)
   creditBalance Int           @default(0)
   updatedAt     DateTime      @default(now())
