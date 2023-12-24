@@ -60,3 +60,10 @@ claculateTotalBalance:
     - http: 
         path: analytic/total-balance
         method: GET
+
+claculateTotalExpense:
+  handler: services/analytic/claculateTotalExpense.handler
+  events:
+    - http: 
+        path: analytic/total-expense
+        method: GET
