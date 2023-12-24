@@ -7,6 +7,9 @@ const listTopCategories = async (event) => {
     const { limit } = event.queryStringParameters;
     const categories = await prisma.transaction.groupBy({
       by: ['categoryId'],
+      where: {
+        spentType: "out"
+      },
       _sum: {
         amount: true,
       },
