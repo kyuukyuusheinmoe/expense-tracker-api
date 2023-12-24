@@ -53,3 +53,10 @@ listTopCategories:
     - http: 
         path: analytic/top-categories
         method: GET
+
+claculateTotalBalance:
+  handler: services/analytic/claculateTotalBalance.handler
+  events:
+    - http: 
+        path: analytic/total-balance
+        method: GET
