@@ -4,10 +4,16 @@ import { responseConstructor } from "../../utils/common.mjs"
 //TODO: add date params
 const prisma = new PrismaClient()
 
-const claculateTotalBalance = async () => {
+const claculateTotalExpense = async (event) => {
+  const { from } = event.queryStringParameters;
+
     const result = await prisma.transaction.aggregate({
       where: {
-        spentType: "out"
+        spentType: "out",
+        createdAt: {
+          lte: new Date(),
+          gte: new Date(from),
+        },
       },
       _sum: {
         amount: true,
@@ -17,6 +23,6 @@ const claculateTotalBalance = async () => {
     return response
 }
 
-const handler = claculateTotalBalance
+const handler = claculateTotalExpense
         
 export {handler};
