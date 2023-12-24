@@ -46,3 +46,10 @@ categoryCreate:
     - http: 
         path: category/create
         method: POST
+
+listTopCategories:
+  handler: services/analytic/listTopCategories.handler
+  events:
+    - http: 
+        path: analytic/top-categories
+        method: GET
