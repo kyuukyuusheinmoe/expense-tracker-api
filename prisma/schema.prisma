@@ -18,6 +18,8 @@ model Account {
   updatedAt     DateTime      @default(now())
   createdAt     DateTime      @default(now())
   Transaction   Transaction[]
+  userId        Int
+  user          User          @relation(fields: [userId], references: [id])
 }
 
 model Transaction {
@@ -33,14 +35,19 @@ model Transaction {
   necessity  String?
   accountId  Int
   account    Account  @relation(fields: [accountId], references: [id])
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  role      Role     @default(BASIC)
-  updatedAt DateTime
-  createdAt DateTime @default(now())
+  id          Int           @id @default(autoincrement())
+  name        String
+  password    String
+  email       String        @unique
+  updatedAt   DateTime
+  createdAt   DateTime      @default(now())
+  Account     Account[]
+  Transaction Transaction[]
 }
 
 model Category {

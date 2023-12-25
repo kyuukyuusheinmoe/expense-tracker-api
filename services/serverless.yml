@@ -67,3 +67,10 @@ claculateTotalExpense:
     - http: 
         path: analytic/total-expense
         method: GET
+
+registerUser:
+  handler: services/auth/register.handler
+  events:
+    - http:
+        path: auth/register
+        method: POST
