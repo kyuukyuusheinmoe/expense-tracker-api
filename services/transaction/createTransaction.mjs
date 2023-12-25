@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client"
 import middy from "middy"
 import httpJsonBodyParser from '@middy/http-json-body-parser'
 import { responseConstructor } from "../../utils/common.mjs"
+import { authHandler } from "../../middleware/authMiddleware.mjs"
 
 const prisma = new PrismaClient
 
@@ -59,6 +60,6 @@ const createTransaction = async (event) => {
     return response;
 }
 
-const handler = middy(createTransaction).use(httpJsonBodyParser())
+const handler = middy(createTransaction).use(httpJsonBodyParser()).use(authHandler())
 
 export {handler}
