@@ -1,14 +1,13 @@
 import jwt from 'jsonwebtoken'
 
 const authHandler = (handler) => {
-   return { before:  async (event, context) => {
-        console.log ('xxx authHandler ', event)
+   return { before:  async (request) => {
+        const {event, context}= request;
         try {
             // Extract the JWT from the Authorization header
             const token = (event?.headers?.Authorization ?? "").split(
                 " "
             );
-            console.log ('xxx token ', token)
 
             // Check if the token exists
             if (!token) {
@@ -19,13 +18,13 @@ const authHandler = (handler) => {
             }
 
             // Verify the token
-            const decodedToken = jwt.verify(token, process.env.JWT_SECRETE);
+            const decodedToken = jwt.verify(token[1], process.env.JWT_SECRETE);
 
             // Attach the decoded token to the event for further use in the handler
-            event.authToken = decodedToken;
+            event.auth= decodedToken;
 
             // Call the next handler
-            return await handler(event, context);
+            // return await handler(event, context);
         } catch (error) {
             console.error('Authentication error:', error);
             return {
