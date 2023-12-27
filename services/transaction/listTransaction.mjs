@@ -1,12 +1,16 @@
 import { PrismaClient } from "@prisma/client"
 import middy from "middy"
 import { responseConstructor } from "../../utils/common.mjs"
+import { authHandler } from "../../middleware/authMiddleware.mjs"
+import httpJsonBodyParser from '@middy/http-json-body-parser'
 
 const prisma = new PrismaClient()
 
 const listTransaction = async (event) => {
+  const {auth} = event;
   const {pageSize, page} = event.queryStringParameters;
     const list = await prisma.transaction.findMany({
+      where: { userId: auth.id},
       skip: page * pageSize,
       take: +pageSize,
       include: {
@@ -24,6 +28,6 @@ const listTransaction = async (event) => {
     return response
 }
 
-const handler = listTransaction
+const handler = middy(listTransaction).use(httpJsonBodyParser()).use(authHandler())
         
 export {handler};
