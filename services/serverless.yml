@@ -74,3 +74,10 @@ registerUser:
     - http:
         path: auth/register
         method: POST
+
+login:
+  handler: services/auth/login.handler
+  events:
+    - http:
+        path: auth/login
+        method: POST
