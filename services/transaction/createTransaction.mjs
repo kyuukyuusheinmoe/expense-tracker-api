@@ -43,7 +43,7 @@ async function addTransactionAndUpdateBalance(transactionData) {
   }
 
 const createTransaction = async (event) => {
-    let response = addTransactionAndUpdateBalance({...event.body, updatedAt: new Date()})
+    let response = addTransactionAndUpdateBalance({...event.body, userId: event.auth.id, updatedAt: new Date()})
         .then((result) => {
             console.log('Transaction added and account balance updated:', result);
             return responseConstructor(200, {message: 'success'})
