@@ -1,10 +1,13 @@
 import { PrismaClient } from "@prisma/client"
 import { responseConstructor } from "../../utils/common.mjs"
+import { authHandler } from "../../middleware/authMiddleware.mjs"
+import middy from "middy"
+import httpJsonBodyParser from '@middy/http-json-body-parser'
 
 const prisma = new PrismaClient()
 
 const listTopCategories = async (event) => {
-    const { limit } = event.queryStringParameters;
+    const { limit=3 } = event.queryStringParameters;
     const categories = await prisma.transaction.groupBy({
       by: ['categoryId'],
       where: {
@@ -45,6 +48,6 @@ const listTopCategories = async (event) => {
     return response
 }
 
-const handler = listTopCategories
+const handler = middy(listTopCategories).use(httpJsonBodyParser()).use(authHandler())
         
 export {handler};
