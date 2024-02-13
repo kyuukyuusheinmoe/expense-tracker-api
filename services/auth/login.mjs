@@ -29,7 +29,7 @@ export const login = async (event) => {
             expiresIn: '1h', // You can set the expiration time as needed
         });
 
-        return responseConstructor(200, { token });
+        return responseConstructor(200, { token, user });
        
     } catch (error) {
         return responseConstructor(500, { message: 'Error Login',error });
