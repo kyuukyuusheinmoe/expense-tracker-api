@@ -1,5 +1,8 @@
 import { PrismaClient } from "@prisma/client"
 import { responseConstructor } from "../../utils/common.mjs"
+import middy from "middy"
+import { authHandler } from "../../middleware/authMiddleware.mjs"
+import httpJsonBodyParser from '@middy/http-json-body-parser'
 
 const prisma = new PrismaClient()
 
@@ -13,6 +16,6 @@ const claculateTotalBalance = async () => {
     return response
 }
 
-const handler = claculateTotalBalance
+const handler = middy(claculateTotalBalance).use(httpJsonBodyParser()).use(authHandler())
         
 export {handler};

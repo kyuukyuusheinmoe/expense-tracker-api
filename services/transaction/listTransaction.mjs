@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client"
-import middy from "middy"
 import { responseConstructor } from "../../utils/common.mjs"
+import middy from "middy"
 import { authHandler } from "../../middleware/authMiddleware.mjs"
 import httpJsonBodyParser from '@middy/http-json-body-parser'
 
