@@ -6,8 +6,9 @@ import httpJsonBodyParser from '@middy/http-json-body-parser'
 
 const prisma = new PrismaClient()
 
-const claculateTotalBalance = async () => {
+const claculateTotalBalance = async (event) => {
     const result = await prisma.account.aggregate({
+      where: { userId: event.auth.id},
       _sum: {
         balance: true,
       },
