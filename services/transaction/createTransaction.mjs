@@ -25,6 +25,10 @@ async function addTransactionAndUpdateBalance(transactionData) {
       const account = await prisma.account.findFirst({
         where: { id: accountId },
       });
+
+      if (account.balance < amount) {
+        throw('error', {message: "Insuffience Balance"})
+      }
   
       // Update the balance in the account
       const updatedAccount = await prisma.account.update({
@@ -50,9 +54,7 @@ const createTransaction = async (event) => {
 
         })
         .catch((error) => {
-            console.error('Error adding transaction:', error);
-            return responseConstructor(500, {message: 'fail'})
-
+            return responseConstructor(500, error || {message: 'fail'})
         })
         .finally(async () => {
             await prisma.$disconnect();
