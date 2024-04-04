@@ -26,7 +26,7 @@ async function addTransactionAndUpdateBalance(transactionData) {
         where: { id: accountId },
       });
 
-      if (account.balance < amount) {
+      if (spentType === 'out' && account.balance < amount) {
         throw('error', {message: "Insuffience Balance"})
       }
   
@@ -54,6 +54,7 @@ const createTransaction = async (event) => {
 
         })
         .catch((error) => {
+          console.log ('xxx error ', error)
             return responseConstructor(500, error || {message: 'fail'})
         })
         .finally(async () => {
