@@ -12,6 +12,13 @@ deleteAccount:
           path: account/{id}
           method: DELETE
 
+fetchAccountDetails:
+    handler: services/account/fetchAccountDetails.handler
+    events:
+      - http: 
+          path: account/{id}
+          method: GET
+
 createAccount:
     handler: services/account/createAccount.handler
     events:
