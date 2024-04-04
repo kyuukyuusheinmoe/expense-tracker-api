@@ -3,7 +3,14 @@ accountList:
   events:
     - http:
         path: account/list
-        method: GET
+        method: GET 
+
+deleteAccount:
+    handler: services/account/deleteAccount.handler
+    events:
+      - http: 
+          path: account/{id}
+          method: DELETE
 
 createAccount:
     handler: services/account/createAccount.handler
