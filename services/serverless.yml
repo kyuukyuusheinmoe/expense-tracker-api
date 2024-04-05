@@ -3,21 +3,7 @@ accountList:
   events:
     - http:
         path: account/list
-        method: GET 
-
-deleteAccount:
-    handler: services/account/deleteAccount.handler
-    events:
-      - http: 
-          path: account/{id}
-          method: DELETE
-
-fetchAccountDetails:
-    handler: services/account/fetchAccountDetails.handler
-    events:
-      - http: 
-          path: account/{id}
-          method: GET
+        method: GET
 
 createAccount:
     handler: services/account/createAccount.handler
@@ -25,6 +11,27 @@ createAccount:
       - http: 
           path: account/create
           method: POST
+
+fetchAccountDetails:
+    handler: services/account/fetchAccountDetails.handler
+    events:
+      - http: 
+          path: account/{id}
+          method: GET 
+
+updateAccount:
+    handler: services/account/updateAccount.handler
+    events:
+      - http: 
+          path: account/{id}
+          method: PATCH
+
+deleteAccount:
+    handler: services/account/deleteAccount.handler
+    events:
+      - http: 
+          path: account/{id}
+          method: DELETE
 
 transactionList:
     handler: services/transaction/listTransaction.handler
