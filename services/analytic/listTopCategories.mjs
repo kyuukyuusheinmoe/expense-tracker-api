@@ -3,16 +3,25 @@ import { responseConstructor } from "../../utils/common.mjs"
 import { authHandler } from "../../middleware/authMiddleware.mjs"
 import middy from "middy"
 import httpJsonBodyParser from '@middy/http-json-body-parser'
+import moment from "moment"
 
 const prisma = new PrismaClient()
 
 const listTopCategories = async (event) => {
-    const { limit=3 } = event.queryStringParameters;
+    const currentDate = new Date()
+    const thisMonthStart = moment(currentDate).startOf('month').format('YYYY-MM-DD');
+    const thisMonthEnd = moment(currentDate).endOf('month').format('YYYY-MM-DD');
+
+    const { limit=3, from=thisMonthStart, to=thisMonthEnd } = event.queryStringParameters;
     const categories = await prisma.transaction.groupBy({
       by: ['categoryId'],
       where: {
         spentType: "out",
-        userId: event.auth.id
+        userId: event.auth.id,
+        createdAt: {
+          gte: new Date(from),
+          lte: new Date(to),
+        },
       },
       _sum: {
         amount: true,
